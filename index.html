@@ -1,0 +1,678 @@
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skinoblood — Маркет скинов CS2</title>
+    <!-- Подключаем шрифт Inter и иконки Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Подключение файла стилей -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo-area">
+                <a href="#" class="logo">
+                    <span class="logo-icon">K</span>
+                    <span class="logo-text">skinoblood</span>
+                </a>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#market" class="nav-link active">Маркет</a>
+                <a href="#sell" class="nav-link" id="nav-sell-btn">Продать скины</a>
+                <a href="#inventory" class="nav-link" id="nav-inventory-btn">Мой инвентарь <span class="badge" id="inv-count-badge">0</span></a>
+                <a href="#rules-section" class="nav-link">Поддержка</a>
+            </nav>
+
+            <div class="user-block">
+                <div class="balance-info">
+                    <span class="balance-label">ВАШ БАЛАНС</span>
+                    <span class="balance-amount">$<span id="user-balance">342.50</span></span>
+                </div>
+                <button class="btn btn-topup" id="topup-btn">
+                    <i class="fa-solid fa-plus"></i> ПОПОЛНИТЬ
+                </button>
+                <div class="user-profile" id="profile-dropdown-btn">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="avatar">
+                    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ БАННЕР (HERO) -->
+    <section class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-subtitle">
+                    <span class="red-dot"></span> ТВОЙ ИНВЕНТАРЬ. ТВОИ ПРАВИЛА.
+                </div>
+                <h1 class="hero-title">
+                    Твои скины.<br>
+                    <span class="text-highlight">Реальные деньги.</span>
+                </h1>
+                <p class="hero-desc">
+                    Продавайте скины CS2 мгновенно. Выводите деньги на карту или в криптовалюте в течение 5 минут. Уже выплачено более $5,000,000.
+                </p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary" id="hero-sell-btn">
+                        ПРОДАТЬ СКИНЫ <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                    <a href="#rules-section" class="btn btn-secondary">
+                        Как это работает <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="skin-case-preview">
+                    <div class="game-badge">COUNTER-STRIKE 2</div>
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=80" alt="Weapon Case" class="case-img">
+                    <div class="inventory-tag">[ ИНВЕНТАРЬ ]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- БАННЕР АКЦИИ -->
+    <div class="container">
+        <div class="promo-banner" id="promo-gift-btn">
+            <span><i class="fa-solid fa-gift"></i> ЕЖЕНЕДЕЛЬНЫЕ ПОДАРКИ И РОЗЫГРЫШИ ТОПОВЫХ СКИНОВ</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </div>
+    </div>
+
+    <!-- МАРКЕТ СКИНОФ -->
+    <section class="market-section" id="market">
+        <div class="container">
+            <div class="market-header">
+                <div class="market-title-area">
+                    <h2>Выбери свой следующий скин</h2>
+                    <p>Красный акцент. Бескомпромиссный стиль.</p>
+                </div>
+                
+                <div class="market-controls">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="skin-search-input" placeholder="Название оружия или скина">
+                    </div>
+                    
+                    <div class="filter-box">
+                        <select id="sort-select">
+                            <option value="default">По умолчанию</option>
+                            <option value="price-asc">Цена: по возрастанию</option>
+                            <option value="price-desc">Цена: по убыванию</option>
+                            <option value="name">По названию</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ГРИД ТОВАРОВ -->
+            <div class="skins-grid" id="skins-grid">
+                <!-- Карточки генерируются скриптом JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ИНФОРМАЦИЯ И ПОДДЕРЖКА -->
+    <section class="info-section" id="rules-section">
+        <div class="container">
+            <div class="section-tag"><span class="red-dot"></span> ИНФОРМАЦИЯ И ПОДДЕРЖКА</div>
+            <h2 class="section-title">Правила, оплата и полезные гайды</h2>
+            <p class="section-desc">Короткая памятка по работе с сервисом, способы пополнения и быстрые рекомендации для безопасной торговли скинами.</p>
+
+            <div class="info-grid">
+                <!-- Колонна 1: Правила -->
+                <div class="info-card">
+                    <div class="card-subtitle">ПРАВИЛА</div>
+                    <h3 class="card-title">Правила пользования</h3>
+                    <p class="card-text">Краткая памятка для безопасной и понятной торговли на Skinoblood.</p>
+
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="num">01</span>
+                            <div>
+                                <h4>Проверяйте состояние и редкость</h4>
+                                <p>Перед покупкой убедитесь, что скин соответствует описанию и выбранному износу.</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="num">02</span>
+                            <div>
+                                <h4>Используйте только безопасные способы оплаты</h4>
+                                <p>Не передавайте средства напрямую другим пользователям и не соглашайтесь на внешние обмены.</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="num">03</span>
+                            <div>
+                                <h4>Сохраняйте историю обмена</h4>
+                                <p>Если возникли вопросы, сохраните скриншоты и обращайтесь в поддержку по правилам сервиса.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Колонна 2: Способы оплаты -->
+                <div class="info-card">
+                    <div class="card-subtitle">ОПЛАТА</div>
+                    <h3 class="card-title">Способы оплаты</h3>
+                    <p class="card-text">Общие категории для пополнения и вывода средств в сервисе.</p>
+
+                    <div class="payment-methods">
+                        <div class="pay-item">
+                            <div class="pay-badge card-badge">CARD</div>
+                            <div>
+                                <h4>Банковская карта</h4>
+                                <p>Пополнение баланса и быстрые операции через удобный интерфейс.</p>
+                            </div>
+                        </div>
+                        <div class="pay-item">
+                            <div class="pay-badge crypto-badge">CRYPTO</div>
+                            <div>
+                                <h4>Криптовалюта</h4>
+                                <p>Дополнительный способ вывода средств и расширение возможностей сервиса.</p>
+                            </div>
+                        </div>
+                        <div class="pay-item">
+                            <div class="pay-badge balance-badge">BALANCE</div>
+                            <div>
+                                <h4>Баланс Skinoblood</h4>
+                                <p>Используйте накопленные средства для покупки скинов без дополнительных операций.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Колонна 3: Гайды -->
+                <div class="info-card">
+                    <div class="card-subtitle">ГАЙДЫ</div>
+                    <h3 class="card-title">Полезное</h3>
+                    <p class="card-text">Быстрые советы по торговле, износу и безопасности.</p>
+
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="num">01</span>
+                            <div>
+                                <h4>Как выбрать скин по износу</h4>
+                                <p>Понимайте разницу между «Прямо с завода», «Немного поношенное» и другими состояниями.</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="num">02</span>
+                            <div>
+                                <h4>Безопасный обмен скинами</h4>
+                                <p>Проверяйте аккаунт продавца, читайте отзывы и не соглашайтесь на внешние сделки.</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="num">03</span>
+                            <div>
+                                <h4>Защита от мошенников</h4>
+                                <p>Не передавайте логин, пароль и данные карты. Подозрительные предложения всегда проверяйте с поддержкой.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="support-footer">
+                <button class="btn btn-secondary btn-techsupport" id="open-support-btn">
+                    ТЕХПОДДЕРЖКА <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div>© 2026 Skinoblood. Все права защищены. CS2 является зарегистрированной торговой маркой Valve Corporation.</div>
+            <div class="footer-links">
+                <a href="#">Условия использования</a>
+                <a href="#">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- МОДАЛЬНЫЕ ОКНА -->
+
+    <!-- Модальное окно пополнения баланса -->
+    <div class="modal-overlay" id="topup-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-topup"><i class="fa-solid fa-xmark"></i></button>
+            <h3>Пополнение баланса</h3>
+            <p>Выберите сумму для пополнения вашего кошелька Skinoblood</p>
+            <div class="topup-presets">
+                <button class="preset-btn" data-amount="10">$10</button>
+                <button class="preset-btn" data-amount="25">$25</button>
+                <button class="preset-btn" data-amount="50">$50</button>
+                <button class="preset-btn" data-amount="100">$100</button>
+            </div>
+            <div class="input-group">
+                <label>Сумма ($):</label>
+                <input type="number" id="topup-amount" value="50" min="1">
+            </div>
+            <button class="btn btn-primary btn-full" id="confirm-topup-btn">ПОПОЛНИТЬ БАЛАНС</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно покупки скина -->
+    <div class="modal-overlay" id="buy-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-buy"><i class="fa-solid fa-xmark"></i></button>
+            <h3>Подтверждение покупки</h3>
+            <div class="buy-skin-preview">
+                <img id="buy-skin-img" src="" alt="Skin">
+                <h4 id="buy-skin-title">Название скина</h4>
+                <p id="buy-skin-condition">Состояние</p>
+                <div class="buy-price" id="buy-skin-price">$0.00</div>
+            </div>
+            <button class="btn btn-primary btn-full" id="confirm-buy-btn">ПОДТВЕРДИТЬ ПОКУПКУ</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно инвентаря -->
+    <div class="modal-overlay" id="inventory-modal">
+        <div class="modal-content modal-large">
+            <button class="modal-close" id="close-inventory"><i class="fa-solid fa-xmark"></i></button>
+            <h3>Мой инвентарь</h3>
+            <p>Купленные скины хранятся здесь. Вы можете продать их обратно на маркет в любой момент.</p>
+            <div class="inventory-grid" id="inventory-grid">
+                <!-- Элементы инвентаря -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Виджет чата техподдержки -->
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header">
+            <span><i class="fa-solid fa-headset"></i> Поддержка Skinoblood</span>
+            <button id="close-chat"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-msg bot">Здравствуйте! Как мы можем помочь вам с торговлей или балансом?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Напишите сообщение...">
+            <button id="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ (TOASTS) -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- СКРИПТ ЛОГИКИ И ИНТЕРАКТИВА -->
+    <script>
+        // ДАННЫЕ СКИНОФ
+        const initialSkins = [
+            {
+                id: 1,
+                category: 'ВИНТОВКА',
+                weapon: 'AK-47',
+                name: 'Bloodsport',
+                condition: 'Прямо с завода (0.04)',
+                price: 125.00,
+                oldPrice: 145.00,
+                image: 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLVb4cfB46o28y5c45YU79-i1A68UINLjg5znD08bu8q-HPbJp_Nvi188oW1p_MQpt4-31fVRk3_P3fzxM7d-304WIlKWzNbmCxT8F7JMj2ruXp9qi2wO1r0A9ZW7wJYKRcwU2NA7W-1a6lO_p1pG6vpzAmyRk73V-5XyInRG1n1gSOeMdrXk_/360fx360f',
+                isFavorite: false
+            },
+            {
+                id: 2,
+                category: 'НОЖ',
+                weapon: 'Karambit',
+                name: 'Doppler Ruby',
+                condition: 'Немного поношенное (0.11)',
+                price: 1450.00,
+                oldPrice: null,
+                image: 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLVb4cfB46o28y5c45YU79-i1A68UINLjg5znD08bu8q-HPbJp_Nvi188oW1p_MQpt4-31fVRk16L3fzxM7d-304WIlKWzNbmCxT8F7JMj2ruXp9qi2wO1r0A9ZW7wJYKRcwU2NA7W-1a6lO_p1pG6vpzAmyRk73V-5XyInRG1n1gSOeMdrXk_/360fx360f',
+                isFavorite: false
+            },
+            {
+                id: 3,
+                category: 'СНАЙПЕРСКАЯ ВИНТОВКА',
+                weapon: 'AWP',
+                name: 'Wildfire',
+                condition: 'После полевых испытаний (0.18)',
+                price: 85.00,
+                oldPrice: null,
+                image: 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLVb4cfB46o28y5c45YU79-i1A68UINLjg5znD08bu8q-HPbJp_Nvi188oW1p_MQpt4-31fVRk06v3fzxM7d-304WIlKWzNbmCxT8F7JMj2ruXp9qi2wO1r0A9ZW7wJYKRcwU2NA7W-1a6lO_p1pG6vpzAmyRk73V-5XyInRG1n1gSOeMdrXk_/360fx360f',
+                isFavorite: false
+            },
+            {
+                id: 4,
+                category: 'ПЕРЧАТКИ',
+                weapon: 'Sport Gloves',
+                name: 'Vice',
+                condition: 'После полевых испытаний (0.22)',
+                price: 920.00,
+                oldPrice: 980.00,
+                image: 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLVb4cfB46o28y5c45YU79-i1A68UINLjg5znD08bu8q-HPbJp_Nvi188oW1p_MQpt4-31fVRk3-L3fzxM7d-304WIlKWzNbmCxT8F7JMj2ruXp9qi2wO1r0A9ZW7wJYKRcwU2NA7W-1a6lO_p1pG6vpzAmyRk73V-5XyInRG1n1gSOeMdrXk_/360fx360f',
+                isFavorite: false
+            },
+            {
+                id: 5,
+                category: 'ПИСТОЛЕТ',
+                weapon: 'Desert Eagle',
+                name: 'Printstream',
+                condition: 'Прямо с завода (0.02)',
+                price: 110.00,
+                oldPrice: null,
+                image: 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLVb4cfB46o28y5c45YU79-i1A68UINLjg5znD08bu8q-HPbJp_Nvi188oW1p_MQpt4-31fVRk1_P3fzxM7d-304WIlKWzNbmCxT8F7JMj2ruXp9qi2wO1r0A9ZW7wJYKRcwU2NA7W-1a6lO_p1pG6vpzAmyRk73V-5XyInRG1n1gSOeMdrXk_/360fx360f',
+                isFavorite: false
+            },
+            {
+                id: 6,
+                category: 'ВИНТОВКА',
+                weapon: 'M4A1-S',
+                name: 'Printstream',
+                condition: 'Немного поношенное (0.09)',
+                price: 290.00,
+                oldPrice: 320.00,
+                image: 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLVb4cfB46o28y5c45YU79-i1A68UINLjg5znD08bu8q-HPbJp_Nvi188oW1p_MQpt4-31fVRk2_P3fzxM7d-304WIlKWzNbmCxT8F7JMj2ruXp9qi2wO1r0A9ZW7wJYKRcwU2NA7W-1a6lO_p1pG6vpzAmyRk73V-5XyInRG1n1gSOeMdrXk_/360fx360f',
+                isFavorite: false
+            }
+        ];
+
+        // СОСТОЯНИЕ ПРИЛОЖЕНИЯ
+        let balance = 342.50;
+        let skinsData = [...initialSkins];
+        let userInventory = [];
+        let selectedSkinForPurchase = null;
+
+        // ИНИЦИАЛИЗАЦИЯ
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSkins(skinsData);
+            updateBalanceUI();
+            updateInventoryBadge();
+
+            // Поиск и сортировка
+            document.getElementById('skin-search-input').addEventListener('input', handleSearchAndSort);
+            document.getElementById('sort-select').addEventListener('change', handleSearchAndSort);
+
+            // Пополнение баланса
+            document.getElementById('topup-btn').addEventListener('click', () => openModal('topup-modal'));
+            document.getElementById('close-topup').addEventListener('click', () => closeModal('topup-modal'));
+            document.getElementById('confirm-topup-btn').addEventListener('click', processTopUp);
+
+            // Кнопки быстрой суммы
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.getElementById('topup-amount').value = e.target.dataset.amount;
+                });
+            });
+
+            // Покупка скина
+            document.getElementById('close-buy').addEventListener('click', () => closeModal('buy-modal'));
+            document.getElementById('confirm-buy-btn').addEventListener('click', processPurchase);
+
+            // Инвентарь
+            document.getElementById('nav-inventory-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                renderInventory();
+                openModal('inventory-modal');
+            });
+            document.getElementById('close-inventory').addEventListener('click', () => closeModal('inventory-modal'));
+
+            // Продать скины кнопки
+            document.getElementById('hero-sell-btn').addEventListener('click', () => {
+                renderInventory();
+                openModal('inventory-modal');
+            });
+            document.getElementById('nav-sell-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                renderInventory();
+                openModal('inventory-modal');
+            });
+
+            // Чат поддержки
+            document.getElementById('open-support-btn').addEventListener('click', toggleChat);
+            document.getElementById('close-chat').addEventListener('click', toggleChat);
+            document.getElementById('chat-send-btn').addEventListener('click', sendChatMessage);
+            document.getElementById('chat-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendChatMessage();
+            });
+
+            // Промо баннер
+            document.getElementById('promo-gift-btn').addEventListener('click', () => {
+                showToast('🎁 Введите промокод GIFT2026 в настройках профиля!');
+            });
+        });
+
+        // ОТРИСОВКА КАРТОЧЕК СКИНОВ
+        function renderSkins(skins) {
+            const grid = document.getElementById('skins-grid');
+            grid.innerHTML = '';
+
+            if (skins.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #8892b0; padding: 40px;">Скины по вашему запросу не найдены</div>';
+                return;
+            }
+
+            skins.forEach(skin => {
+                const card = document.createElement('div');
+                card.className = 'skin-card';
+                
+                const oldPriceHTML = skin.oldPrice ? `<span class="old-price">$${skin.oldPrice.toFixed(2)}</span>` : '';
+                const favClass = skin.isFavorite ? 'fa-solid text-red' : 'fa-regular';
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="skin-cat">${skin.category}</span>
+                        <i class="${favClass} fa-heart fav-icon" onclick="toggleFavorite(${skin.id})"></i>
+                    </div>
+                    <div class="skin-img-wrap">
+                        <img src="${skin.image}" alt="${skin.name}">
+                    </div>
+                    <div class="skin-details">
+                        <div class="weapon-name">${skin.weapon}</div>
+                        <div class="skin-title">${skin.name}</div>
+                        <div class="skin-cond">${skin.condition}</div>
+                        <div class="card-action">
+                            <div class="skin-price">
+                                $${skin.price.toFixed(2)}
+                                ${oldPriceHTML}
+                            </div>
+                            <button class="btn btn-buy" onclick="initiatePurchase(${skin.id})">
+                                КУПИТЬ <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // РЕНДЕР ИНВЕНТАРЯ
+        function renderInventory() {
+            const grid = document.getElementById('inventory-grid');
+            grid.innerHTML = '';
+
+            if (userInventory.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; color: #8892b0; padding: 30px;">Ваш инвентарь пуст. Купите скины на маркете!</div>';
+                return;
+            }
+
+            userInventory.forEach((skin, index) => {
+                const card = document.createElement('div');
+                card.className = 'skin-card';
+                card.innerHTML = `
+                    <div class="skin-img-wrap">
+                        <img src="${skin.image}" alt="${skin.name}">
+                    </div>
+                    <div class="skin-details">
+                        <div class="weapon-name">${skin.weapon}</div>
+                        <div class="skin-title">${skin.name}</div>
+                        <div class="skin-cond">${skin.condition}</div>
+                        <div class="card-action">
+                            <div class="skin-price">$${skin.price.toFixed(2)}</div>
+                            <button class="btn btn-primary" onclick="sellSkinFromInventory(${index})">
+                                ПРОДАТЬ
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // ОБРАБОТКА ПОИСКА И СОРТИРОВКИ
+        function handleSearchAndSort() {
+            const query = document.getElementById('skin-search-input').value.toLowerCase();
+            const sortBy = document.getElementById('sort-select').value;
+
+            let filtered = skinsData.filter(s => 
+                s.name.toLowerCase().includes(query) || 
+                s.weapon.toLowerCase().includes(query) ||
+                s.category.toLowerCase().includes(query)
+            );
+
+            if (sortBy === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (sortBy === 'name') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            renderSkins(filtered);
+        }
+
+        // ИЗБРАННОЕ
+        function toggleFavorite(id) {
+            const skin = skinsData.find(s => s.id === id);
+            if (skin) {
+                skin.isFavorite = !skin.isFavorite;
+                handleSearchAndSort();
+                showToast(skin.isFavorite ? 'Скин добавлен в избранное' : 'Скин удален из избранного');
+            }
+        }
+
+        // ПОПОЛНЕНИЕ БАЛАНСА
+        function processTopUp() {
+            const val = parseFloat(document.getElementById('topup-amount').value);
+            if (isNaN(val) || val <= 0) {
+                showToast('Введите корректную сумму', true);
+                return;
+            }
+            balance += val;
+            updateBalanceUI();
+            closeModal('topup-modal');
+            showToast(`Успешно пополнено на $${val.toFixed(2)}!`);
+        }
+
+        // ПОКУПКА
+        function initiatePurchase(id) {
+            const skin = skinsData.find(s => s.id === id);
+            if (!skin) return;
+
+            selectedSkinForPurchase = skin;
+            document.getElementById('buy-skin-img').src = skin.image;
+            document.getElementById('buy-skin-title').innerText = `${skin.weapon} | ${skin.name}`;
+            document.getElementById('buy-skin-condition').innerText = skin.condition;
+            document.getElementById('buy-skin-price').innerText = `$${skin.price.toFixed(2)}`;
+
+            openModal('buy-modal');
+        }
+
+        function processPurchase() {
+            if (!selectedSkinForPurchase) return;
+
+            if (balance < selectedSkinForPurchase.price) {
+                showToast('Недостаточно средств на балансе!', true);
+                closeModal('buy-modal');
+                openModal('topup-modal');
+                return;
+            }
+
+            balance -= selectedSkinForPurchase.price;
+            userInventory.push({...selectedSkinForPurchase});
+            updateBalanceUI();
+            updateInventoryBadge();
+
+            showToast(`Успешно куплен: ${selectedSkinForPurchase.name}`);
+            closeModal('buy-modal');
+        }
+
+        // ПРОДАЖА ИЗ ИНВЕНТАРЯ
+        function sellSkinFromInventory(index) {
+            const item = userInventory[index];
+            balance += item.price;
+            userInventory.splice(index, 1);
+            updateBalanceUI();
+            updateInventoryBadge();
+            renderInventory();
+            showToast(`Скин ${item.name} продан за $${item.price.toFixed(2)}`);
+        }
+
+        // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ UI
+        function updateBalanceUI() {
+            document.getElementById('user-balance').innerText = balance.toFixed(2);
+        }
+
+        function updateInventoryBadge() {
+            document.getElementById('inv-count-badge').innerText = userInventory.length;
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function toggleChat() {
+            const chat = document.getElementById('chat-widget');
+            chat.classList.toggle('active');
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            const box = document.getElementById('chat-messages');
+            
+            // Сообщение юзера
+            const userDiv = document.createElement('div');
+            userDiv.className = 'chat-msg user';
+            userDiv.innerText = msg;
+            box.appendChild(userDiv);
+
+            input.value = '';
+            box.scrollTop = box.scrollHeight;
+
+            // Ответ бота
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'chat-msg bot';
+                botDiv.innerText = 'Оператор поддержки подключится в течение 2 минут. Ваше обращение зафиксировано!';
+                box.appendChild(botDiv);
+                box.scrollTop = box.scrollHeight;
+            }, 1000);
+        }
+
+        function showToast(text, isError = false) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${isError ? 'error' : ''}`;
+            toast.innerText = text;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('fade-out');
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
